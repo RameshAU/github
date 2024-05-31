@@ -25,7 +25,7 @@ jobs:
         
     - name: Push the Docker image
       run: docker push ramesh0112/my-image-name:v1
-jobs:
+      
   deploy:
     runs-on: linux
     
