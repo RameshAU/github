@@ -27,7 +27,7 @@ jobs:
       run: docker push ramesh0112/my-image-name:v1
       
   deploy:
-    runs-on: linux-latest
+    runs-on: ubuntu-latest
     
     steps:
     - name: ssh
@@ -37,7 +37,7 @@ jobs:
 
     - name: deploy
       run:  |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << EOF
+        ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << EOF
         sudo docker pull ramesh0112/my-image-name:v1
         sudo docker run -itd -p 80:80 --name cont ramesh0112/my-image-name:v1
         EOF
