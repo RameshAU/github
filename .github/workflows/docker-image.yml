@@ -27,7 +27,7 @@ jobs:
       run: docker push ramesh0112/my-image-name:v1
       
   deploy:
-    runs-on: linux
+    runs-on: linux-latest
     
     steps:
     - name: ssh
