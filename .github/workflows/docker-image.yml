@@ -25,3 +25,19 @@ jobs:
         
     - name: Push the Docker image
       run: docker push ramesh0112/my-image-name:v1
+jobs:
+  deploy:
+    runs-on: linux
+    
+    steps:
+    - name: ssh
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+    - name: deploy
+      run:  |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_INSTANCE_IP }} << EOF
+        docker pull ramesh0112/my-image-name:v1
+        docker run -itd -p 80:80 --name cont ramesh0112/my-image-name:v1
+        EOF
