@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:v1
+      run: docker build . --file Dockerfile --tag ramesh0112/my-image-name:v1
 
     - name: Login
       uses: docker/login-action@v2
@@ -24,4 +24,4 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         
     - name: Push the Docker image
-      run: docker push my-image-name:v1
+      run: docker push ramesh0112/my-image-name:v1
